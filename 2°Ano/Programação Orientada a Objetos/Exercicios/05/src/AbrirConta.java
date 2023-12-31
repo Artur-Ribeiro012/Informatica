@@ -6,7 +6,8 @@ public class AbrirConta {
     private String dono;
     private boolean estado;
     private float saldo;
-
+    
+    
     //métodos
 
     public void AbrirConta(String t) {
@@ -19,23 +20,57 @@ public class AbrirConta {
         }
     }
 
-    public void fecharConta() {
-
+    public void fecharConta() {     
+        if (saldo>0) {
+            System.out.println("A conta tem dinheiro");
+        } else {
+            if (saldo<0) {
+                System.out.print("Conta em débito");
+            } else {
+                this.setEstado(false);
+            }
+        }
     }
-    public void depositar() {
-
+    public void depositar(float v) {
+        if(estado == true) {
+            saldo = saldo + v;
+        } else {
+            System.out.println("Impossível");
+        }
     }
-    public void sacar() {
-        
+    public void sacar(float v) {
+        if(estado == true) {
+            if(saldo > v) {
+                saldo = saldo - v;
+            } else {
+                System.out.print("Saldo Insuficiente");
+            }
+        } else {
+            System.out.print("Impossível Sacar");
+        }
     }
     public void pagarMensal() {
-
+        float valor;
+         valor = 0;
+         
+        if(tipo =="CC") {
+            valor = 12;
+        } else {
+            if(tipo =="CP") {
+                valor =20;
+            }
+            if (estado == true) {
+                if(saldo > valor) {
+                    saldo = saldo - valor;
+                }
+            }
+        }
     }
 
     //Métodos Especiais
      public AbrirConta() {
-        saldo = 0;
-        estado = false;
+        this.saldo = 0;
+        this.estado = false;
     } 
     public void setNumConta(int n) {
         this.numConta = n;
